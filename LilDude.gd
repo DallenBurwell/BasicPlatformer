@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-//TEST COMMENT
+#TEST COMMENT
 var velocity = Vector2(0, 0)
 const SPEED = 300;
 const GRAVITY = 40;
