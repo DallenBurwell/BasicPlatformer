@@ -2,9 +2,12 @@ extends KinematicBody2D
 
 #TEST COMMENT
 var velocity = Vector2(0, 0)
+var coins = 0;
 const SPEED = 300;
 const GRAVITY = 40;
 const JUMPFORCE = -1100;
+
+signal coin_collected
 
 func _physics_process(delta):
 	if Input.is_action_pressed("right"):
@@ -34,3 +37,9 @@ func _physics_process(delta):
 
 func _on_fallzone_body_entered(body):
 	get_tree().change_scene("res://Level1.tscn")
+
+
+func add_coin():
+	coins = coins + 1
+	emit_signal("coin_collected")
+	
