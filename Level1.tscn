@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://world_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://LilDude.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://ASSETS/fonts/BalsamiqSans-Bold.ttf" type="DynamicFontData" id=7]
 [ext_resource path="res://ASSETS/HUD/coin_gold.png" type="Texture" id=8]
 [ext_resource path="res://HUD.gd" type="Script" id=9]
+[ext_resource path="res://blobenemy.tscn" type="PackedScene" id=10]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 96, 32 )
@@ -218,5 +219,14 @@ position = Vector2( 1856, -320 )
 
 [node name="coin4" parent="Coins" instance=ExtResource( 6 )]
 position = Vector2( 1216, -320 )
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="blobenemy" parent="enemies" instance=ExtResource( 10 )]
+position = Vector2( 536.535, 485.017 )
+
+[node name="blobenemy2" parent="enemies" instance=ExtResource( 10 )]
+position = Vector2( 228.878, 488.58 )
+direction = 1
 [connection signal="coin_collected" from="LilDude" to="HUD" method="_on_coin_collected"]
 [connection signal="body_entered" from="fallzone" to="LilDude" method="_on_fallzone_body_entered"]
