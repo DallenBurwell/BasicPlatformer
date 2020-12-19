@@ -55,6 +55,8 @@ format = 1
 tile_data = PoolIntArray( -65506, 3, 0, -65505, 3, 0, 30, 3, 0, 31, 3, 0, 32, 3, 0, 65540, 2, 0, 65541, 1, 0, 65542, 1, 0, 65543, 1, 0, 65544, 0, 0, 65567, 3, 0, 65568, 3, 0, 65569, 3, 0, 131076, 3, 0, 131077, 3, 0, 131078, 3, 0, 131079, 3, 0, 131080, 3, 0, 131104, 3, 0, 131105, 3, 0, 131106, 3, 0, 196612, 3, 0, 196613, 3, 0, 196614, 3, 0, 196615, 3, 0, 196616, 3, 0, 196641, 3, 0, 196642, 3, 0, 196643, 3, 0, 196644, 3, 0, 196649, 0, 0, 262148, 3, 0, 262149, 3, 0, 262150, 3, 0, 262151, 3, 0, 262152, 3, 0, 262178, 3, 0, 262179, 3, 0, 262180, 3, 0, 262181, 3, 0, 262182, 3, 0, 262183, 3, 0, 262184, 3, 0, 262185, 3, 0, 327684, 1, 0, 327685, 1, 0, 327686, 1, 0, 327687, 3, 0, 327688, 3, 0, 327715, 3, 0, 327716, 3, 0, 327717, 3, 0, 327718, 3, 0, 327719, 3, 0, 327720, 3, 0, 327721, 3, 0, 393220, 3, 0, 393221, 3, 0, 393222, 3, 0, 393223, 3, 0, 393224, 3, 0, 458756, 3, 0, 458757, 3, 0, 458758, 3, 0, 458759, 3, 0, 458760, 3, 0 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Tiles One-Way"]
+collision_layer = 2147483650
+collision_mask = 2147483697
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tiles One-Way/StaticBody2D"]
 position = Vector2( 352, 352 )
@@ -70,21 +72,6 @@ one_way_collision = true
 position = Vector2( 2656, 224 )
 shape = SubResource( 3 )
 one_way_collision = true
-
-[node name="LilDude" parent="." instance=ExtResource( 2 )]
-position = Vector2( 251.969, 364.399 )
-collision_mask = 30
-
-[node name="Camera2D" type="Camera2D" parent="LilDude"]
-current = true
-limit_left = 0
-limit_right = 4480
-limit_bottom = 800
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_enabled = true
-smoothing_speed = 10.0
-editor_draw_limits = true
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
@@ -223,10 +210,26 @@ position = Vector2( 1216, -320 )
 [node name="enemies" type="Node2D" parent="."]
 
 [node name="blobenemy" parent="enemies" instance=ExtResource( 10 )]
-position = Vector2( 536.535, 485.017 )
+position = Vector2( 896, 256 )
 
 [node name="blobenemy2" parent="enemies" instance=ExtResource( 10 )]
-position = Vector2( 228.878, 488.58 )
+position = Vector2( 768, 256 )
 direction = 1
-[connection signal="coin_collected" from="LilDude" to="HUD" method="_on_coin_collected"]
+detect_edge = false
+
+[node name="LilDude" parent="." instance=ExtResource( 2 )]
+position = Vector2( 251.969, 364.399 )
+collision_mask = 30
+
+[node name="Camera2D" type="Camera2D" parent="LilDude"]
+current = true
+limit_left = 0
+limit_right = 4480
+limit_bottom = 800
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+smoothing_speed = 10.0
+editor_draw_limits = true
 [connection signal="body_entered" from="fallzone" to="LilDude" method="_on_fallzone_body_entered"]
+[connection signal="coin_collected" from="LilDude" to="HUD" method="_on_coin_collected"]
