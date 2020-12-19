@@ -10,6 +10,8 @@ func _ready():
 		$AnimatedSprite.flip_h = true
 	$DetectFloor.position.x = $CollisionShape2D.shape.get_extents().x * direction #Determines which side to place raycast on enemy
 	$DetectFloor.enabled = detect_edge
+	if detect_edge:
+		set_modulate(Color(1.8,1.8,.6))
 
 
 func _physics_process(delta):
@@ -37,12 +39,12 @@ func _on_TopChecker_body_entered(body):
 		$SideChecker.set_collision_layer_bit(4, false)
 		$SideChecker.set_collision_mask_bit(0, false)
 		$Timer.start()
+		body.bounce()
 
 
 func _on_SideChecker_body_entered(body):
 	if body.name == "LilDude":
-		print("ouchhhh")
-		get_tree().change_scene("res://Level1.tscn")
+		body.loseLife(position.x)
 
 
 func _on_Timer_timeout():

@@ -42,4 +42,23 @@ func _on_fallzone_body_entered(body):
 func add_coin():
 	coins = coins + 1
 	emit_signal("coin_collected")
+
+func bounce():
+	velocity.y = JUMPFORCE * .7
+
+func loseLife(var enemyX):
+	set_modulate(Color(1,0.3,0.3,0.4))
+	velocity.y = JUMPFORCE * 0.5
+	if position.x < enemyX:
+		velocity.x = -800
+	elif position.x > enemyX:
+		velocity.x = 800
 	
+	Input.action_release("left")
+	Input.action_release("right")
+	
+	$Timer.start()
+
+
+func _on_Timer_timeout():
+	get_tree().change_scene("res://Level1.tscn")
