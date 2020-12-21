@@ -3,6 +3,7 @@ extends KinematicBody2D
 #TEST COMMENT
 var velocity = Vector2(0, 0)
 var coins = 0;
+var lives = 2;
 const SPEED = 300;
 const GRAVITY = 40;
 const JUMPFORCE = -1100;
@@ -36,7 +37,13 @@ func _physics_process(delta):
 
 
 func _on_fallzone_body_entered(body):
-	get_tree().change_scene("res://Level1.tscn")
+	
+	lives = lives - 1
+	if lives <= 0:
+		get_tree().change_scene("res://GameOver.tscn")
+	else:
+		get_tree().change_scene("res://Level1.tscn")
+	
 
 
 func add_coin():
@@ -47,6 +54,7 @@ func bounce():
 	velocity.y = JUMPFORCE * .7
 
 func loseLife(var enemyX):
+	lives = lives - 1
 	set_modulate(Color(1,0.3,0.3,0.4))
 	velocity.y = JUMPFORCE * 0.5
 	if position.x < enemyX:
@@ -61,4 +69,5 @@ func loseLife(var enemyX):
 
 
 func _on_Timer_timeout():
-	get_tree().change_scene("res://Level1.tscn")
+	if lives <= 0:
+		get_tree().change_scene("res://GameOver.tscn")
